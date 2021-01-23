@@ -1,21 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { Text, View, StyleSheet, Image, TouchableOpacity, Alert} from 'react-native'
+import imageSilueta from './assets/silueta.jpg'
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={style.conteiner}>
+      <Text style={style.title}> Hello</Text>
+      <Image
+        source={imageSilueta}
+        style={style.image} 
+      />
+      <TouchableOpacity
+      style={style.button}
+        onPress={() => Alert.alert('Hi :)')}
+
+      >
+        <Text style={style.buttonText}>PRESS ME</Text>
+      </TouchableOpacity>
     </View>
-  );
+
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
+const style = StyleSheet.create({
+  conteiner: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'grey'
   },
-});
+  title: {
+    fontSize: 30,
+    color: 'white',
+    padding: 15,
+    margin: 5
+  },
+  image: {
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    margin:10
+  },
+  button: {
+    width: 90,
+    height: 25,
+    backgroundColor: 'deepskyblue',
+    padding: 3
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: 'white'
+  }
+})
+
+export default App
