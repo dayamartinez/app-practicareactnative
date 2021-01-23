@@ -11,9 +11,8 @@ const App = () => {
         style={style.image} 
       />
       <TouchableOpacity
-      style={style.button}
+        style={style.button}
         onPress={() => Alert.alert('Hi :)')}
-
       >
         <Text style={style.buttonText}>PRESS ME</Text>
       </TouchableOpacity>
