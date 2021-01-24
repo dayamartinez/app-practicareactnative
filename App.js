@@ -1,20 +1,41 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity, Alert} from 'react-native'
 import imageSilueta from './assets/silueta.jpg'
+import * as imagePicker from 'expo-image-picker'
+import * as sharing from 'expo-sharing'
 
 const App = () => {
+
+  const [selectedImage, setSelectedImage] = useState(null)
+
+  let openImagePickerAsync = async () => {
+    let permission = await imagePicker.requestMediaLibraryPermissionsAsync() // permite el acceso para abrir la galeria
+    if(permission.granted === 'false'){
+      Alert.alert('Los permisos para acceder a la galeria son requeridos')
+      return;
+    } 
+
+    const pickerResult = await imagePicker.launchImageLibraryAsync() // abre la galeria y érmite seleccionar una imagen
+    if(pickerResult.cancelled === true) return; //si el usuario no selecciona una imagen, continuamos sin hacer nada
+    setSelectedImage({localUri: pickerResult.uri()})
+  }
+
+  const openShereImage = () => {
+
+  }
+
   return (
     <View style={style.conteiner}>
-      <Text style={style.title}> Hello</Text>
+      <Text style={style.title}>selecciona una imagen</Text>
       <Image
-        source={imageSilueta}
+        source={selectedImage === null ? imageSilueta : selectedImage.localuRI}
         style={style.image} 
       />
       <TouchableOpacity
         style={style.button}
-        onPress={() => Alert.alert('Hi :)')}
+        onPress={openImagePickerAsync}
       >
-        <Text style={style.buttonText}>PRESS ME</Text>
+        <Text style={style.buttonText}> Seleccionar </Text>
       </TouchableOpacity>
     </View>
 
